@@ -14,14 +14,15 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<Home />} />
+          <Route index element={<Settings />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="projects" element={<Projects />} />
           <Route path="tasks" element={<Tasks />} />
           <Route path="users" element={<Users />} />
           <Route path="reporting" element={<Reporting />} />
-          <Route path="settings" element={<Settings />} />
+          
           <Route path="support" element={<Support />} />
+          <Route path="home" element={<Home />} />
         </Route>
       </Routes>
     </BrowserRouter>

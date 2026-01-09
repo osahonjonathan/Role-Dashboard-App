@@ -5,6 +5,7 @@ export function SidebarItem({ title, path, icon: Icon, badge }: NavItem) {
   return (
     <NavLink
       to={path}
+      end={path === "/"}
       className={({ isActive }) =>
         `flex items-center justify-between px-3 py-2 rounded-md transition-colors group ${
           isActive

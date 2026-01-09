@@ -10,7 +10,7 @@ import supportIcon from "@/assets/icons/support.svg";
 import settingsIcon from "@/assets/icons/settings.svg";
 
 export const mainNavItems: NavItem[] = [
-  { title: "Home", path: "/", icon: homeIcon },
+  { title: "Home", path: "/home", icon: homeIcon },
   { title: "Dashboard", path: "/dashboard", icon: dashboardIcon, badge: 10 },
   { title: "Projects", path: "/projects", icon: projectsIcon },
   { title: "Tasks", path: "/tasks", icon: tasksIcon },
@@ -20,5 +20,5 @@ export const mainNavItems: NavItem[] = [
 
 export const bottomNavItems: NavItem[] = [
   { title: "Support", path: "/support", icon: supportIcon },
-  { title: "Settings", path: "/settings", icon: settingsIcon },
+  { title: "Settings", path: "/", icon: settingsIcon },
 ];
