@@ -5,9 +5,10 @@ This project is a high-fidelity frontend dashboard built with **React**, **TypeS
 ## Table of Contents
 
 1. [Setup Instructions](#setup-instructions)
-2. [Design Decisions and Assumptions](#design-decisions-and-assumptions)
-3. [AI Prompts Used](#ai-prompts-used)
-4. [Reflection Questions](#reflection-questions)
+2. [Testing](#testing)
+3. [Design Decisions and Assumptions](#design-decisions-and-assumptions)
+4. [AI Prompts Used](#ai-prompts-used)
+5. [Reflection Questions](#reflection-questions)
 
 ---
 
@@ -36,6 +37,31 @@ To run this project locally, follow these steps:
 
 ---
 
+## Testing
+
+The project includes a comprehensive testing suite using **Vitest** and **React Testing Library**. Tests cover critical components and the API service layer.
+
+1. **Run all tests**:
+
+   ```bash
+   npm run test
+   ```
+
+   This will start the Vitest test runner in watch mode.
+
+2. **Run tests once (CI mode)**:
+
+   ```bash
+   npm run test -- --run
+   ```
+
+3. **What is tested**:
+   - **Components**: `RoleCard` and `RolesTable` are tested for rendering, user interactions, and state changes (Loading/Error/Success).
+   - **Service Layer**: The `api.ts` utility is tested to ensure proper data fetching and response handling.
+   - **Integration**: React Query integration is tested through component mocks.
+
+---
+
 ## Design Decisions and Assumptions
 
 ### Frontend Architecture and State Management
@@ -60,10 +86,9 @@ To run this project locally, follow these steps:
   - Smooth entry/exit animations for the mobile sidebar navigation.
 - **Placeholder States**: Implemented dynamic placeholders for "under construction" sections (Profile, Password, Team) to provide a polished feel even when features are still developing.
 
-### Assumptions
-
-- **No Active Backend**: All data is currently managed via static constants to satisfy the assessment's frontend focus.
-- **Internal Tool Focus**: Assumes the user is already authenticated; hence, navigation focuses on internal settings and role management.
+- **API-Driven Data**: The application is integrated with a live REST API (`https://role-api-psi.vercel.app/api`) to fetch real-time roles data. This replaces the initial static constant approach and implements modern data fetching patterns.
+- **Environment Configuration**: API base URLs and other sensitive configurations are managed via `.env` files and `import.meta.env` for security and multi-environment support.
+- **Automated Testing**: Unit and integration tests are implemented to ensure the reliability of the UI and data layer, following standard frontend engineering practices.
 - **Modern Browsers**: Targeted for modern evergreen browsers that support CSS grid, flexbox, and modern JavaScript features.
 
 ---
