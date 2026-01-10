@@ -8,11 +8,7 @@ import { Button } from "@/components/ui/button";
 import { RoleCard } from "@/components/settings/RoleCard";
 import { RolesTable } from "@/components/settings/RolesTable";
 import { SettingsTabs } from "@/components/settings/SettingsTabs";
-import {
-  SETTINGS_TABS,
-  SELECTABLE_ROLES,
-  ROLES_DATA,
-} from "@/constants/settings";
+import { SETTINGS_TABS, SELECTABLE_ROLES } from "@/constants/settings";
 
 export default function Settings() {
   const [activeRole, setActiveRole] = useState("superadmin");
@@ -166,7 +162,7 @@ export default function Settings() {
                 </Button>
               </div>
 
-              <RolesTable roles={ROLES_DATA} />
+              <RolesTable />
             </div>
           </TabsContent>
         </Tabs>

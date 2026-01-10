@@ -11,19 +11,45 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Checkbox } from "@/components/ui/checkbox";
 
-interface RoleData {
-  readonly name: string;
-  readonly type: string;
-  readonly date: string;
-  readonly status: string;
-  readonly users: readonly number[];
-}
+import { useQuery } from "@tanstack/react-query";
+import { fetchRoles, type Role } from "@/lib/api";
 
-interface RolesTableProps {
-  readonly roles: readonly RoleData[];
-}
+export function RolesTable() {
+  const {
+    data: roles,
+    isLoading,
+    error,
+  } = useQuery<Role[]>({
+    queryKey: ["roles"],
+    queryFn: fetchRoles,
+  });
 
-export function RolesTable({ roles }: RolesTableProps) {
+  if (isLoading) {
+    return (
+      <div className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm p-8 text-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
+        <p className="mt-4 text-gray-500">Loading roles...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm p-8 text-center">
+        <p className="text-red-500 font-medium">Failed to load roles</p>
+        <p className="text-sm text-gray-500 mt-1">{(error as Error).message}</p>
+      </div>
+    );
+  }
+
+  if (!roles || roles.length === 0) {
+    return (
+      <div className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm p-8 text-center text-gray-500">
+        No roles found.
+      </div>
+    );
+  }
+
   return (
     <div className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
       <Table>
@@ -63,7 +89,11 @@ export function RolesTable({ roles }: RolesTableProps) {
                 {role.type}
               </TableCell>
               <TableCell className="text-gray-500 text-sm">
-                {role.date}
+                {new Intl.DateTimeFormat("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                }).format(new Date(role.date))}
               </TableCell>
               <TableCell>
                 <Badge
