@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, vi, expect } from "vitest";
 import axios from "axios";
 import { fetchRoles } from "./api";
 
@@ -33,15 +33,11 @@ describe("api service", () => {
       },
     ];
 
-    // We need to re-mock the instance created by axios.create
     const mockGet = vi.fn().mockResolvedValue({ data: { data: mockRoles } });
-    (axios.create as any).mockReturnValue({ get: mockGet });
+    const mockInstance = { get: mockGet };
+    (axios.create as any).mockReturnValue(mockInstance);
 
-    // Since api.ts creates the instance at the top level, we might need to reset modules
-    // or mock axios.create before api.ts is imported.
-    // For simplicity, let's assume the mock works or we refactor api.ts if needed.
-
-    // Actually, because api.ts is imported at the top, the instance is already created.
-    // Let's try to mock the specific call.
+    const roles = await fetchRoles();
+    expect(roles).toEqual(mockRoles);
   });
 });
