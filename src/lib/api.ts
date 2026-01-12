@@ -5,6 +5,7 @@ const api = axios.create({
 });
 
 export interface Role {
+  id: number;
   name: string;
   type: "DEFAULT" | "CUSTOM" | "SYSTEM-CUSTOM";
   date: string;

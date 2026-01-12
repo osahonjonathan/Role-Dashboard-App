@@ -78,7 +78,7 @@ export function RolesTable() {
         </TableHeader>
         <TableBody>
           {roles.map((role) => (
-            <TableRow key={role.name}>
+            <TableRow key={role.id}>
               <TableCell>
                 <Checkbox />
               </TableCell>
